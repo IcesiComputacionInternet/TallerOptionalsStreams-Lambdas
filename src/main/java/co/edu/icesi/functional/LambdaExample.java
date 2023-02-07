@@ -4,6 +4,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+
+
 public class LambdaExample {
 
     /**
@@ -12,7 +14,7 @@ public class LambdaExample {
      * @return an integer representation of the string
      */
     public Function<String, Integer> stringToIntFunction() {
-        return null;
+        return (str) -> Integer.parseInt(str);
     }
 
     /**
@@ -24,8 +26,18 @@ public class LambdaExample {
      * @return a random lowercase string of the given length
      */
     public Supplier<String> randomStringSupplier(int length) {
-        return null;
+        return () -> makeWord(length);
     }
+
+    public String makeWord(int length){
+        String word = "";
+        for(int i=0; i<length; i++){
+            word +=(char) (Math.random()*26 + 'a');
+        }
+        return word;
+    }
+
+
 
     /**
      *  Create a predicate using a lambda or method reference that filters the strings with repeated characters case-insensitive
@@ -33,7 +45,7 @@ public class LambdaExample {
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
     public Predicate<String> containsRepeatedCharacters() {
-        return null;
+        return (str)->str.toLowerCase().chars().distinct().count() == str.length() ;
     }
 
 
