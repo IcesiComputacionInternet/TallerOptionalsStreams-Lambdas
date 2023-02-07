@@ -33,7 +33,7 @@ public class LambdaTest {
         Matcher onlyLowCaseLettersMatcher = onlyLowCaseLettersPattern.matcher(randomizedString);
 
         assertEquals(length, randomizedString.length());
-        assertTrue(onlyLowCaseLettersMatcher.matches());
+            assertTrue(onlyLowCaseLettersMatcher.matches());
     }
 
     @Test
