@@ -9,3 +9,5 @@
  El taller tiene 5.5 puntos y la nota maxima es de 5.0
  
  A las 3:55 deberian validar y subir su codigo.
+ 
+ Entrega hasta la media noche sobre 5.0 - se elimina el punto de mapear a simple name!
