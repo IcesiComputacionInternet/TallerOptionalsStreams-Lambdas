@@ -13,7 +13,10 @@ public class OptionalExample {
      * @return The street of the given icesiUser
      */
     public String obtainUserStreet(IcesiUser icesiUser) {
-        return null;
+
+        Optional<IcesiUser> optionalUser = Optional.ofNullable(icesiUser);
+
+        return optionalUser;
     }
 
 
