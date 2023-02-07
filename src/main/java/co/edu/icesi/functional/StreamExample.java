@@ -16,7 +16,8 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
-        return null;
+        List<String> lastNames = icesiUsers.stream().map(IcesiUser::getLastName).toList();
+        return lastNames;
     }
 
     /**

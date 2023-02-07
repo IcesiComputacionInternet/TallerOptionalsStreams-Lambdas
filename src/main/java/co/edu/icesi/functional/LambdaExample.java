@@ -11,9 +11,7 @@ public class LambdaExample {
      *  value = 0.5
      * @return an integer representation of the string
      */
-    public Function<String, Integer> stringToIntFunction() {
-        return null;
-    }
+    public Function<String, Integer> stringToIntFunction() { return null; }
 
     /**
      * Create a supplier using a lambda or method reference that returns a random string of the
@@ -24,6 +22,9 @@ public class LambdaExample {
      * @return a random lowercase string of the given length
      */
     public Supplier<String> randomStringSupplier(int length) {
+        Supplier<String> supplier;
+
+
         return null;
     }
 
