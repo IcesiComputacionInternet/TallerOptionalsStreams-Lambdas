@@ -33,6 +33,21 @@ public class StreamTest {
     }
 
     @Test
+    public void testAllDifferentLastNamesSortedNoNullValuesAndComposed() {
+        List<IcesiUser> icesiUsers = new ArrayList<>(Arrays.asList(
+                new IcesiUser("John", "Doe Smith"),
+                new IcesiUser("Jane", "Doe"),
+                new IcesiUser("Jim", "Smith")
+        ));
+
+        List<String> result = streamExample.allDifferentLastNamesSorted(icesiUsers);
+
+        assertEquals(2, result.size());
+        assertEquals("Doe", result.get(0));
+        assertEquals("Smith", result.get(1));
+    }
+
+    @Test
     public void testAllDifferentLastNamesSortedWithNullValues() {
         List<IcesiUser> icesiUsers = new ArrayList<>(Arrays.asList(
                 new IcesiUser("John", "Doe"),

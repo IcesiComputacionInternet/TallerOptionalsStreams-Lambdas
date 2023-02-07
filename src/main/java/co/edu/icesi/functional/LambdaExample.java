@@ -1,7 +1,5 @@
 package co.edu.icesi.functional;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Locale;
 import java.util.Random;
 import java.util.function.Function;
@@ -48,7 +46,7 @@ public class LambdaExample {
     public Predicate<String> containsRepeatedCharacters() {
         Predicate<String> repeatedLetters = new Predicate<String>() {
             @Override
-            public boolean test(@NotNull String s) {
+            public boolean test(String s) {
                 s = s.toLowerCase(Locale.ROOT);
                 for (int i = 0; i< s.length()-1; i++){
                     if(s.charAt(i) == s.charAt(i+1)){

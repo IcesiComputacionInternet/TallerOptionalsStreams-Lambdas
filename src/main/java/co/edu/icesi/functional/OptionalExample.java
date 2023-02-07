@@ -16,8 +16,7 @@ public class OptionalExample {
      */
     public String obtainUserStreet(IcesiUser icesiUser) {
         Optional<String> optionalString = Optional.ofNullable(icesiUser.getAddress().getStreet());
-        String ln = optionalString.orElseThrow(RuntimeException::new);
-        return ln;
+        return optionalString.orElseThrow(RuntimeException::new);
     }
 
 
