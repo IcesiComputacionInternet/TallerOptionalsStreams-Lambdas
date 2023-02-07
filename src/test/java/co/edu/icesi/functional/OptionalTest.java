@@ -16,7 +16,6 @@ public class OptionalTest {
         IcesiUser icesiUser = defaultIcesiUser();
         String expected = icesiUser.getAddress().getStreet();
         String result = optionalExample.obtainUserStreet(icesiUser);
-
         assertEquals(expected, result);
     }
 
