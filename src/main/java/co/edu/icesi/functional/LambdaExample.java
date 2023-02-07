@@ -12,7 +12,7 @@ public class LambdaExample {
      * @return an integer representation of the string
      */
     public Function<String, Integer> stringToIntFunction() {
-        return null;
+        return x -> Integer.parseInt(x);
     }
 
     /**
@@ -24,7 +24,14 @@ public class LambdaExample {
      * @return a random lowercase string of the given length
      */
     public Supplier<String> randomStringSupplier(int length) {
-        return null;
+        return () -> {
+            String randomString = "";
+            for (int i = 0; i < length; i++) {
+                randomString += (char) (Math.random() * 26 + 'a');
+                System.out.println(randomString);
+            }
+            return randomString;
+        };
     }
 
     /**
@@ -33,7 +40,7 @@ public class LambdaExample {
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
     public Predicate<String> containsRepeatedCharacters() {
-        return null;
+        return (x) -> x.toLowerCase().chars().distinct().count() == x.length();
     }
 
 
