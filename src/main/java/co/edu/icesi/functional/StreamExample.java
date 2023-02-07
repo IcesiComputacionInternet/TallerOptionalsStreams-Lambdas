@@ -1,5 +1,6 @@
 package co.edu.icesi.functional;
 
+import co.edu.icesi.model.IcesiAddress;
 import co.edu.icesi.model.IcesiUser;
 import co.edu.icesi.model.SimpleName;
 
@@ -36,7 +37,9 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
-        return null;
+        return icesiUsers.stream().filter(Objects::nonNull)
+                .filter(user -> Optional.ofNullable(user.getAddress()).map(IcesiAddress::getStreet)
+                        .filter(street::equals).isPresent()).collect(Collectors.toList());
     }
 
     /**
