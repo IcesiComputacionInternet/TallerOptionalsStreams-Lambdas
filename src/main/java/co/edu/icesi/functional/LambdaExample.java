@@ -1,5 +1,6 @@
 package co.edu.icesi.functional;
 
+import java.util.Arrays;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -11,8 +12,9 @@ public class LambdaExample {
      *  value = 0.5
      * @return an integer representation of the string
      */
+
     public Function<String, Integer> stringToIntFunction() {
-        return null;
+        return (str) -> Integer.parseInt(str);
     }
 
     /**
@@ -24,7 +26,13 @@ public class LambdaExample {
      * @return a random lowercase string of the given length
      */
     public Supplier<String> randomStringSupplier(int length) {
-        return null;
+        return () -> {
+            String str = "";
+            for (int i = 0; i < length; i++) {
+                str += (char) (Math.random() * 26 + 'a');
+            }
+            return str;
+        };
     }
 
     /**
@@ -33,7 +41,7 @@ public class LambdaExample {
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
     public Predicate<String> containsRepeatedCharacters() {
-        return null;
+        return (str) -> str.toLowerCase().chars().distinct().count() == str.length();
     }
 
 
