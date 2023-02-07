@@ -3,8 +3,10 @@ package co.edu.icesi.functional;
 import co.edu.icesi.model.IcesiUser;
 import co.edu.icesi.model.SimpleName;
 
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 public class StreamExample {
 
     /**
@@ -16,7 +18,8 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
-        return null;
+        List<String> users = icesiUsers.stream().flatMap(s -> Arrays.stream(s.split(" ")))
+
     }
 
     /**
@@ -29,7 +32,8 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
-        return null;
+        List<IcesiUser> s = icesiUsers.stream().filter(user -> user.getAddress()!= null && user.getAddress().getStreet() != null && user.getAddress().getStreet().equals(street)).toList();
+        return s;
     }
 
     /**
@@ -39,8 +43,14 @@ public class StreamExample {
      * @return a list of SimpleName.
      */
     public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
-        return null;
+        List<String> names = icesiUsers.stream().map(IcesiUser::getFirstName).toList();
+        List<String> lastNames = icesiUsers.stream().map(IcesiUser::getLastName).toList();
+        List<SimpleName> simple = new ArrayList<>();
+        for (int i = 0; i < names.size(); i++) {
+            simple.add(new SimpleName(names.get(i), lastNames.get(i)));
+
+        }
+        return simple;
+        //List<SimpleName> simpeNames = Stream.concat(names.stream
     }
-
-
 }

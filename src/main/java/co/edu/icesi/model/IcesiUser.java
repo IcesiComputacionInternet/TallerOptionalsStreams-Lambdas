@@ -78,4 +78,8 @@ public class IcesiUser {
     public int hashCode() {
         return Objects.hash(firstName, lastName, salary, active, address);
     }
+
+    public int[] split(String string) {
+        return null;
+    }
 }
