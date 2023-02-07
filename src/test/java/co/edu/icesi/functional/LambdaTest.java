@@ -31,7 +31,6 @@ public class LambdaTest {
         String randomizedString = lambdaExample.randomStringSupplier(length).get();
         Pattern onlyLowCaseLettersPattern = Pattern.compile("[a-z]*");
         Matcher onlyLowCaseLettersMatcher = onlyLowCaseLettersPattern.matcher(randomizedString);
-
         assertEquals(length, randomizedString.length());
         assertTrue(onlyLowCaseLettersMatcher.matches());
     }
