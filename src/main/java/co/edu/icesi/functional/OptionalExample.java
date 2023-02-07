@@ -37,7 +37,7 @@ public class OptionalExample {
      * @return the description of the given icesiUser or "default description" if not present.
      */
     public String obtainUserDescription(IcesiUser icesiUser) {
-        Optional<IcesiUser> icesiUserOptional = Optional.of(icesiUser);
+        Optional<IcesiUser> icesiUserOptional = Optional.ofNullable(icesiUser);
         if(icesiUserOptional.isEmpty()){
             return "default description";
         }else{
