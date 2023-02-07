@@ -28,7 +28,6 @@ public class LambdaExample {
             String randomString = "";
             for (int i = 0; i < length; i++) {
                 randomString += (char) (Math.random() * 26 + 'a');
-                System.out.println(randomString);
             }
             return randomString;
         };
