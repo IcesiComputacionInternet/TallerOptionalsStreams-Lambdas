@@ -4,6 +4,8 @@ import co.edu.icesi.model.IcesiUser;
 import co.edu.icesi.model.SimpleName;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 public class StreamExample {
 
@@ -16,6 +18,7 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
+        
         return null;
     }
 
@@ -39,7 +42,10 @@ public class StreamExample {
      * @return a list of SimpleName.
      */
     public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
-        return null;
+        List<SimpleName> simpleNames = icesiUsers.stream().filter(Objects::nonNull).map(icesiUser ->
+                new SimpleName(icesiUser.getFirstName(), icesiUser.getLastName())
+        ).toList();
+        return simpleNames;
     }
 
 

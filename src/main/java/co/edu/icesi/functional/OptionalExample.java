@@ -30,7 +30,6 @@ public class OptionalExample {
      */
     public String obtainUserDescription(IcesiUser icesiUser) {
         Optional<String> userAddress = Optional.ofNullable(icesiUser).map(IcesiUser::getAddress).map(IcesiAddress::getDescription);
-
         return userAddress.orElse("default description");
     }
 
