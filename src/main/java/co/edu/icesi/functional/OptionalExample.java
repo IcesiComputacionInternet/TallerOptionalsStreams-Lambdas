@@ -32,17 +32,13 @@ public class OptionalExample {
      * @return the description of the given icesiUser or "default description" if not present.
      */
     public String obtainUserDescription(IcesiUser icesiUser) {
-        Optional<IcesiUser> user = Optional.of(icesiUser);
-        Optional<String> description;
-        if(user.isPresent()){
-            description = Optional.of(user.get().getAddress().getDescription());
-            description.orElse("default description");
-        }else{
-            description = Optional.of("default description");
-        }
-
-        return description.get();
-
+        Optional<IcesiUser> user = Optional.ofNullable(icesiUser);
+        IcesiAddress icesiAddress = new IcesiAddress();
+        icesiAddress.setDescription("default description");
+        IcesiUser auxUser = new IcesiUser();
+        auxUser.setAddress(icesiAddress);
+        Optional<String> description = Optional.ofNullable(user.orElse(auxUser).getAddress().getDescription());
+        return description.orElse("default description");
     }
 
 }
