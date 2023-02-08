@@ -3,7 +3,11 @@ package co.edu.icesi.functional;
 import co.edu.icesi.model.IcesiUser;
 import co.edu.icesi.model.SimpleName;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class StreamExample {
 
@@ -16,7 +20,17 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
-        List<String> lastNames = icesiUsers.stream().map(IcesiUser::getLastName).toList();
+        List<IcesiUser> noNullList = icesiUsers.stream().filter(Objects::nonNull).toList();
+        //List<String> lastNames = icesiUsers.stream().map(IcesiUser::getLastName).toList().stream().distinct().toList();
+
+        List<String> lastNames = noNullList.stream().map(IcesiUser::getLastName).toList().stream().distinct().toList();
+
+        //
+        /*List<String> complexLastNames = lastNames.stream().filter(elem -> !elem.contains(" ")).toList();
+        List<String> complexLastNamesMerged =
+        List<String> removedComplexLastNames = lastNames.stream().filter(elem -> elem.contains(" ")).toList();*/
+
+
         return lastNames;
     }
 
