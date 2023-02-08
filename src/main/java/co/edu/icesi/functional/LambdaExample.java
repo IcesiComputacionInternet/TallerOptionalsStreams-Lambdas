@@ -29,7 +29,7 @@ public class LambdaExample {
         return () -> randomString(length);
     }
 
-    public String randomString(int length){
+    public String randomString(int length){ // se puede hacer mejor, cuidado con los nombres de las variables. No usar String si no StringBuilder!
         String s = "";
         Random r = new Random();
         for(int i = 0; i<length; i++){
@@ -44,6 +44,7 @@ public class LambdaExample {
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
     public Predicate<String> containsRepeatedCharacters() {
+        // No deberias usar esta forma para representar un predicado. -0.5
         Predicate<String> repeatedLetters = new Predicate<String>() {
             @Override
             public boolean test(String s) {

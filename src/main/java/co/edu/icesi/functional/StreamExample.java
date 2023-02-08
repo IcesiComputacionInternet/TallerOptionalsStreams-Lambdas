@@ -20,7 +20,7 @@ public class StreamExample {
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
         List<String> lastnames = icesiUsers.stream().filter(Objects::nonNull).map(IcesiUser::getLastName).distinct().toList();
         List<String> dLastNames = new ArrayList<>();
-        for(int i = 0; i<lastnames.size(); i++) {
+        for(int i = 0; i<lastnames.size(); i++) { // Aquí no usamos for's -0.5
             dLastNames.addAll(List.of((lastnames.get(i).split(" "))));
         }
         return dLastNames.stream().distinct().sorted().toList();
@@ -36,7 +36,7 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
-        return icesiUsers.stream().filter(x->(x.getAddress() != null)&&(x.getAddress().getStreet() !=null)).filter(x -> x.getAddress().getStreet().equals(street)).toList();
+        return icesiUsers.stream().filter(x->(x.getAddress() != null)&&(x.getAddress().getStreet() !=null)).filter(x -> x.getAddress().getStreet().equals(street)).toList(); // para que existen los optionals? -0.5
     }
 
     /**
@@ -46,7 +46,7 @@ public class StreamExample {
      * @return a list of SimpleName.
      */
     public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
-        return icesiUsers.stream().filter(Objects::nonNull).map(x -> new SimpleName(x.getFirstName(),x.getLastName())).toList();
+        return icesiUsers.stream().filter(Objects::nonNull).map(x -> new SimpleName(x.getFirstName(),x.getLastName())).toList(); // -0.5 por entregar despues de las 4:00 pm
     }
 
 
