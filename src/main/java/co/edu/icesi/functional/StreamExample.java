@@ -1,9 +1,14 @@
 package co.edu.icesi.functional;
 
+import co.edu.icesi.model.IcesiAddress;
 import co.edu.icesi.model.IcesiUser;
 import co.edu.icesi.model.SimpleName;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.SplittableRandom;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class StreamExample {
 
@@ -16,7 +21,7 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
-        return null;
+        return icesiUsers.stream().filter(this::notNull).map(IcesiUser::getLastName).flatMap(list -> Arrays.stream(list.split(" "))).distinct().sorted().toList();
     }
 
     /**
@@ -29,7 +34,19 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
-        return null;
+        return icesiUsers.stream().filter((user) -> haveAddressAndStreet(user) && matchStreet(getStreet(user), street)).toList();
+    }
+
+    private boolean haveAddressAndStreet(IcesiUser icesiUser){
+        return icesiUser.getAddress() != null && icesiUser.getAddress().getStreet() != null;
+    }
+
+    private String getStreet(IcesiUser user){
+        return user.getAddress().getStreet();
+    }
+
+    private boolean matchStreet(String userStreet, String searchingStreet){
+        return userStreet.equals(searchingStreet);
     }
 
     /**
@@ -39,8 +56,14 @@ public class StreamExample {
      * @return a list of SimpleName.
      */
     public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
-        return null;
+        return icesiUsers.stream().filter(this::notNull).map(this::simpleNameMaker).toList();
     }
 
+    private SimpleName simpleNameMaker(IcesiUser user){
+        return new SimpleName(user.getFirstName(), user.getLastName());
+    }
 
+    private boolean notNull(IcesiUser user){
+        return user != null;
+    }
 }

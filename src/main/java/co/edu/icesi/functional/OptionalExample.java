@@ -1,6 +1,9 @@
 package co.edu.icesi.functional;
 
+import co.edu.icesi.model.IcesiAddress;
 import co.edu.icesi.model.IcesiUser;
+
+import java.util.Optional;
 
 public class OptionalExample {
 
@@ -13,8 +16,12 @@ public class OptionalExample {
      * @return The street of the given icesiUser
      */
     public String obtainUserStreet(IcesiUser icesiUser) {
-        return null;
+        Optional<IcesiUser> optionalIcesiUser = Optional.ofNullable(icesiUser);
+        Optional<String> optionalStreet = optionalIcesiUser.map(IcesiUser::getAddress).map(IcesiAddress::getStreet);
+        return optionalStreet.orElseThrow(() -> new RuntimeException("Couldn't get the street"));
     }
+
+
 
 
     /**
@@ -25,7 +32,9 @@ public class OptionalExample {
      * @return the description of the given icesiUser or "default description" if not present.
      */
     public String obtainUserDescription(IcesiUser icesiUser) {
-        return null;
+        Optional<IcesiUser> optionalIcesiUser = Optional.ofNullable(icesiUser);
+        Optional<String> description = optionalIcesiUser.map(IcesiUser::getAddress).map(IcesiAddress::getDescription);
+        return description.orElseGet(() -> "default description");
     }
 
 
