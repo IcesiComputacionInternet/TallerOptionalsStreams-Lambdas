@@ -50,14 +50,15 @@ public class LambdaExample {
 
     private boolean repeatChar(String string){
 
-        string.toLowerCase();
-        boolean repeat = false;
-        Character aux;
-        for(int i = 0; i < string.length() && !repeat; i++){
-            aux = string.charAt(i);
-            string.replace(aux,' ');
-            if(string.contains(String.valueOf(aux))) {
-                repeat = true;
+        boolean repeat = true;
+        boolean aux2 = true;
+        char aux;
+        StringBuilder str = new StringBuilder(string.toLowerCase());
+        for(int i = 0; i < string.length() && aux2; i++){
+            aux = str.charAt(i);
+            str.replace(i,i+1," ");
+            if(str.toString().contains(String.valueOf(aux))) {
+                repeat = false;
             }
         }
 
