@@ -49,7 +49,6 @@ public class LambdaExample {
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
     public Predicate<String> containsRepeatedCharacters() {
-        Pattern noRepeatedCharacters = Pattern.compile("[ -~]?");
         return x -> checkRepeatedCharacters(x.toLowerCase());
     }
 
