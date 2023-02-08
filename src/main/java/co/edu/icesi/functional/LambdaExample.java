@@ -56,19 +56,17 @@ public class LambdaExample {
      */
     public Predicate<String> containsRepeatedCharacters() {
 
-        /*List<String> result = null;
+        Predicate<String> predicate = s -> verifyRepeatition(s);
+        return predicate;
+    }
 
-        Predicate<String> predicate = s -> {
-            int cont = 0;
-            for (int i = 0; i < s.length(); i++) {
-                if(chain.charAt(i) == character) {
-                    cont++;
-                }
-            }
-            return result.equals(null);
-        };
-        return predicate;*/
-        return null;
+    public boolean verifyRepeatition(String word){
+        String wordFiltered = word.toLowerCase();
+        long wordNonDuplicated = wordFiltered.chars().distinct().count();
+        int originalLength = word.length();
+
+        return wordNonDuplicated == originalLength;
+
     }
 
 

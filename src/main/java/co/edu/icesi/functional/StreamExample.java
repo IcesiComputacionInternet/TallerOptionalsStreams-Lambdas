@@ -1,5 +1,6 @@
 package co.edu.icesi.functional;
 
+import co.edu.icesi.model.IcesiAddress;
 import co.edu.icesi.model.IcesiUser;
 import co.edu.icesi.model.SimpleName;
 
@@ -27,7 +28,7 @@ public class StreamExample {
 
         //
         /*List<String> complexLastNames = lastNames.stream().filter(elem -> !elem.contains(" ")).toList();
-        List<String> complexLastNamesMerged =
+        List<String> complexLastNamesMerged = null;
         List<String> removedComplexLastNames = lastNames.stream().filter(elem -> elem.contains(" ")).toList();*/
 
 
@@ -44,6 +45,10 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
+        List<IcesiUser> noNullListIcesiUsers = icesiUsers.stream().filter(Objects::nonNull).toList();
+        List<IcesiAddress> noNullListIcesiUsersAddresses = noNullListIcesiUsers.stream().map(IcesiUser::getAddress).filter(Objects::nonNull).collect(Collectors.toList());
+
+
         return null;
     }
 
