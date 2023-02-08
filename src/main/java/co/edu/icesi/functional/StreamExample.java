@@ -3,7 +3,9 @@ package co.edu.icesi.functional;
 import co.edu.icesi.model.IcesiUser;
 import co.edu.icesi.model.SimpleName;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class StreamExample {
 
@@ -16,7 +18,21 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
-        return null;
+        //Evitamos agregar nulos
+        List<IcesiUser> filterNoNull = icesiUsers.stream().filter(icesiUser -> icesiUser!=null).toList();
+        //Traemos los lastnames en un lista
+        List<String[]> lastNames = filterNoNull.stream().map(icesiUser -> icesiUser.getLastName().split(" ")).toList();
+        List<String> transform = new ArrayList<String>();
+        //Unificamostodo el arreglo de arreglos en una sola lista
+            for (int i = 0; i < lastNames.size() ; i++) {
+                for (int j = 0; j < lastNames.get(i).length; j++) {
+                    transform.add(lastNames.get(i)[j]);
+                }
+            }
+       // Lo ponemos solo a mostrar los distintos
+        List<String > distinctLastNames = transform.stream().distinct().toList();
+            List<String>sortedLastNames = distinctLastNames.stream().sorted().toList();
+        return  sortedLastNames;
     }
 
     /**
@@ -29,7 +45,13 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
-        return null;
+        Optional<String> optionalStreet = Optional.of(street);
+        List<IcesiUser> filtered = new ArrayList<>();
+        if(optionalStreet.isPresent()) {
+            List<IcesiUser> filterNoNull = icesiUsers.stream().filter(icesiUser -> icesiUser.getAddress()!=null && icesiUser.getAddress().getStreet()!=null).toList();
+            filtered = filterNoNull.stream().filter(icesiUser -> icesiUser.getAddress().getStreet().matches(street)).toList();
+        }
+        return filtered;
     }
 
     /**
@@ -39,7 +61,9 @@ public class StreamExample {
      * @return a list of SimpleName.
      */
     public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
-        return null;
+        List<IcesiUser> filterNoNull = icesiUsers.stream().filter(icesiUser -> icesiUser!=null).toList();
+        List<SimpleName> simpleName = filterNoNull.stream().map(icesiUser -> new SimpleName(icesiUser.getFirstName(), icesiUser.getLastName())).toList();
+        return simpleName;
     }
 
 
