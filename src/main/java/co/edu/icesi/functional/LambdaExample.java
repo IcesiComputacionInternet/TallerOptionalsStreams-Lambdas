@@ -1,5 +1,7 @@
 package co.edu.icesi.functional;
 
+import java.util.List;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -12,7 +14,7 @@ public class LambdaExample {
      * @return an integer representation of the string
      */
     public Function<String, Integer> stringToIntFunction() {
-        return null;
+        return numero -> Integer.parseInt(numero);
     }
 
     /**
@@ -24,7 +26,18 @@ public class LambdaExample {
      * @return a random lowercase string of the given length
      */
     public Supplier<String> randomStringSupplier(int length) {
-        return null;
+        Supplier<String> cadenaRandom =  () -> randomStr(length);
+        return cadenaRandom;
+    }
+
+    public String randomStr(int l){
+        Random rand = new Random();
+        String dictionary = "abcdefghijklmnopqrstuvwxyz";
+        String cadena = "";
+        for ( int i = 0; i < l; i++){
+            cadena += dictionary.charAt(rand.nextInt(dictionary.length()));
+        }
+        return cadena;
     }
 
     /**
@@ -33,7 +46,20 @@ public class LambdaExample {
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
     public Predicate<String> containsRepeatedCharacters() {
-        return null;
+        Predicate<String> checking = s -> repeatedCheck(s);
+        return checking;
+    }
+
+    public boolean repeatedCheck(String cadena) {
+        boolean state = true;
+        for(int i = 0; i < cadena.length(); i++){
+            for(int j = i+1; j < cadena.length(); j++){
+                if(Character.toLowerCase(cadena.charAt(i)) == Character.toLowerCase(cadena.charAt(j))){
+                    state = false;
+                }
+            }
+        }
+        return state;
     }
 
 

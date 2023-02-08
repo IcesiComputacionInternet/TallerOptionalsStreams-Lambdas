@@ -3,7 +3,10 @@ package co.edu.icesi.functional;
 import co.edu.icesi.model.IcesiUser;
 import co.edu.icesi.model.SimpleName;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class StreamExample {
 
@@ -16,7 +19,12 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
-        return null;
+        List<String> lastnames = icesiUsers.stream().filter(Objects::nonNull)
+                .map(icesiUser -> icesiUser.getLastName())
+                .flatMap(composedLastName -> Arrays.stream(composedLastName.split(" ")))
+                .sorted().distinct().toList();
+
+        return lastnames;
     }
 
     /**
@@ -29,7 +37,11 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
-        return null;
+        List<IcesiUser> matches = icesiUsers.stream().filter(Objects::nonNull)
+                .filter(icesiUser -> Objects.nonNull(icesiUser.getAddress()) &&
+                        Objects.nonNull(icesiUser.getAddress().getStreet()) &&
+                        icesiUser.getAddress().getStreet().equals(street)).toList();
+        return matches;
     }
 
     /**
