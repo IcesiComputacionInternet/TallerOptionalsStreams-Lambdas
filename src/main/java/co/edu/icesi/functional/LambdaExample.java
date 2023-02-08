@@ -1,8 +1,10 @@
 package co.edu.icesi.functional;
 
+import java.util.Random;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.random.RandomGenerator;
 
 public class LambdaExample {
 
@@ -12,7 +14,7 @@ public class LambdaExample {
      * @return an integer representation of the string
      */
     public Function<String, Integer> stringToIntFunction() {
-        return null;
+        return numberString->Integer.valueOf(numberString);
     }
 
     /**
@@ -24,7 +26,18 @@ public class LambdaExample {
      * @return a random lowercase string of the given length
      */
     public Supplier<String> randomStringSupplier(int length) {
-        return null;
+        return () -> {
+            String finalWord="";
+            String alphabet="abcdefghijklmnopqrstuvwxyz";
+            Random randomFuction=new Random();
+
+            for (int i = 0; i <length ; i++) {
+                int index=randomFuction.nextInt(alphabet.length());
+                char ramdomCharValue= alphabet.charAt(index);
+                finalWord+=ramdomCharValue;
+            }
+            return finalWord;
+        };
     }
 
     /**
@@ -33,8 +46,6 @@ public class LambdaExample {
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
     public Predicate<String> containsRepeatedCharacters() {
-        return null;
+        return (sentence) -> sentence.toLowerCase().chars().distinct().count() == sentence.length();
     }
-
-
 }
