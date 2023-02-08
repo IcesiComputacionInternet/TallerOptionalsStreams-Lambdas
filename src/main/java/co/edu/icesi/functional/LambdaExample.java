@@ -27,16 +27,16 @@ public class LambdaExample {
      */
     public Supplier<String> randomStringSupplier(int length) {
         return () -> {
-            String finalWord="";
+            String finalRandomWord="";
             String alphabet="abcdefghijklmnopqrstuvwxyz";
             Random randomFuction=new Random();
 
             for (int i = 0; i <length ; i++) {
                 int index=randomFuction.nextInt(alphabet.length());
                 char ramdomCharValue= alphabet.charAt(index);
-                finalWord+=ramdomCharValue;
+                finalRandomWord+=ramdomCharValue;
             }
-            return finalWord;
+            return finalRandomWord;
         };
     }
 
