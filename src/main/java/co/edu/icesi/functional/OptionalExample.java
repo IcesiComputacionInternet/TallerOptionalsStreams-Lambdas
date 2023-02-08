@@ -16,11 +16,11 @@ public class OptionalExample {
      * @return The street of the given icesiUser
      */
     public String obtainUserStreet(IcesiUser icesiUser) {
-
-    Optional<IcesiAddress> optional = Optional.ofNullable(icesiUser.getAddress());
-    if(optional.isPresent()){
+    Optional<String> optionalStreet = Optional.ofNullable(icesiUser.getAddress().getStreet());
+    if(optionalStreet.isPresent()){
         return icesiUser.getAddress().getStreet();
-    }else{
+    }
+    else{
         throw new RuntimeException("Couldn't get the street");
     }
 

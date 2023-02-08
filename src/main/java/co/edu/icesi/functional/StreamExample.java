@@ -18,21 +18,20 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
-        //Evitamos agregar nulos
+        //Without nulls
         List<IcesiUser> filterNoNull = icesiUsers.stream().filter(icesiUser -> icesiUser!=null).toList();
-        //Traemos los lastnames en un lista
+        //Lastnames to a list
         List<String[]> lastNames = filterNoNull.stream().map(icesiUser -> icesiUser.getLastName().split(" ")).toList();
         List<String> transform = new ArrayList<String>();
-        //Unificamostodo el arreglo de arreglos en una sola lista
+        // Only one list of string
             for (int i = 0; i < lastNames.size() ; i++) {
                 for (int j = 0; j < lastNames.get(i).length; j++) {
                     transform.add(lastNames.get(i)[j]);
                 }
             }
-       // Lo ponemos solo a mostrar los distintos
-        List<String > distinctLastNames = transform.stream().distinct().toList();
-            List<String>sortedLastNames = distinctLastNames.stream().sorted().toList();
-        return  sortedLastNames;
+       // Show the distinct and order
+        List<String > result = transform.stream().distinct().toList().stream().sorted().toList();
+        return  result;
     }
 
     /**
