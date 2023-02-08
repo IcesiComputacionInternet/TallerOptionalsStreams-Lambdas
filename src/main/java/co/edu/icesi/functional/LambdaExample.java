@@ -1,5 +1,7 @@
 package co.edu.icesi.functional;
 
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -12,7 +14,7 @@ public class LambdaExample {
      * @return an integer representation of the string
      */
     public Function<String, Integer> stringToIntFunction() {
-        return null;
+        return x -> Integer.valueOf(x);
     }
 
     /**
@@ -24,7 +26,18 @@ public class LambdaExample {
      * @return a random lowercase string of the given length
      */
     public Supplier<String> randomStringSupplier(int length) {
-        return null;
+        return () -> randomString(length);
+    }
+
+    public String randomString(int length) {
+        String result = "";
+        for (int i = 0; i < length; i++) {
+            Random r = new Random();
+            char c = (char) (r.nextInt(26) + 'a');
+            System.out.println(c);
+            result = result + c;
+        }
+        return result;
     }
 
     /**
@@ -33,8 +46,22 @@ public class LambdaExample {
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
     public Predicate<String> containsRepeatedCharacters() {
-        return null;
+        return (x) -> repeatedVerifier(x);
     }
 
+    public boolean repeatedVerifier(String word) {
+        ArrayList<Character> filtered = new ArrayList<>();
+        for(int i=0; i<word.length(); i++) {
+            if(!filtered.contains(word.charAt(i)) && !filtered.contains(Character.toUpperCase(word.charAt(i))) ) {
+                filtered.add(word.charAt(i));
+            }
+        }
+        if(word.length() == filtered.size()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
 }
