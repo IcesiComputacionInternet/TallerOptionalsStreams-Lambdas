@@ -1,9 +1,10 @@
 package co.edu.icesi.functional;
 
+import co.edu.icesi.model.IcesiAddress;
 import co.edu.icesi.model.IcesiUser;
 import co.edu.icesi.model.SimpleName;
-
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class StreamExample {
 
@@ -16,7 +17,12 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
-        return null;
+        Set<String> lastNames = icesiUsers.stream()
+                .flatMap(user -> Arrays.stream(user.getLastName().split(" ")))
+                .collect(Collectors.toSet());
+        return lastNames.stream()
+                .sorted(String::compareToIgnoreCase)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -29,7 +35,9 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
-        return null;
+        return icesiUsers.stream()
+                .filter(user -> Optional.ofNullable(user).map(IcesiUser::getAddress).map(IcesiAddress::getStreet).filter(street::equals).isPresent())
+                .toList();
     }
 
     /**
@@ -39,8 +47,10 @@ public class StreamExample {
      * @return a list of SimpleName.
      */
     public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
-        return null;
+        return icesiUsers.stream()
+                .map(user -> Optional.ofNullable(user).map(u -> new SimpleName(u.getFirstName(), u.getLastName())))
+                .flatMap(Optional::stream)
+                .collect(Collectors.toList());
     }
-
 
 }
