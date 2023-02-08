@@ -1,9 +1,12 @@
 package co.edu.icesi.functional;
 
+import co.edu.icesi.model.IcesiAddress;
 import co.edu.icesi.model.IcesiUser;
 import co.edu.icesi.model.SimpleName;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class StreamExample {
 
@@ -16,8 +19,14 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
-        return null;
+        List<IcesiUser> notNullList=icesiUsers.stream().filter(iu->iu!=null).toList();
+        List<String> listLastNames= notNullList.stream().map(IcesiUser::getLastName).toList();
+        List<List<String>>  listAllLastNames=listLastNames.stream().map(str-> List.of(str.split(" "))).toList();
+        List<String> flatMap=listAllLastNames.stream().flatMap(Collection::stream).distinct().sorted().toList();
+
+        return flatMap;
     }
+
 
     /**
      * given a list of IcesiUser's filter the list by the ones that match the street name with
@@ -29,8 +38,11 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
-        return null;
+        List<IcesiUser> notNullList=icesiUsers.stream().filter(iu->iu!=null && iu.getAddress()!=null).toList();
+        List<IcesiUser> filterUsers=notNullList.stream().filter(iu->street.equals(iu.getAddress().getStreet())).toList();
+        return filterUsers;
     }
+
 
     /**
      * given a list of IcesiUser's map the names to a SimpleName class.
@@ -39,7 +51,11 @@ public class StreamExample {
      * @return a list of SimpleName.
      */
     public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
-        return null;
+        List<IcesiUser> notNullList=icesiUsers.stream().filter(iu->iu!=null).toList();
+
+        List<SimpleName> snMap=notNullList.stream().map(iu-> new SimpleName(iu.getFirstName(), iu.getLastName())).toList();
+
+        return snMap;
     }
 
 
