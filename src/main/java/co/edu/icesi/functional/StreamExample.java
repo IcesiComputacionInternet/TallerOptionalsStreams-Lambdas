@@ -3,7 +3,7 @@ package co.edu.icesi.functional;
 import co.edu.icesi.model.IcesiUser;
 import co.edu.icesi.model.SimpleName;
 
-import java.util.List;
+import java.util.*;
 
 public class StreamExample {
 
@@ -16,8 +16,8 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
-        List<String> filteredLastNames = icesiUsers.stream().map( x -> x.getLastName()).toList();
-        return filteredLastNames;
+        return icesiUsers.stream().filter(x -> Optional.ofNullable(x).isPresent()).filter(x -> Optional.ofNullable(x.getLastName()).isPresent())
+                .map(x -> x.getLastName().split(" ")).flatMap(Arrays::stream).distinct().sorted().toList();
     }
 
     /**
@@ -30,7 +30,8 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
-        return null;
+        return icesiUsers.stream().filter(x -> Optional.ofNullable(x).isPresent()).filter(x -> Optional.ofNullable(x.getAddress()).isPresent())
+                .filter(x -> Optional.ofNullable(x.getAddress().getStreet()).isPresent()).filter(x -> x.getAddress().getStreet().equals(street)).toList();
     }
 
     /**
@@ -40,7 +41,9 @@ public class StreamExample {
      * @return a list of SimpleName.
      */
     public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
-        return null;
+        List<SimpleName> simpleNames = icesiUsers.stream().filter(x -> Optional.ofNullable(x).isPresent()).filter(x -> Optional.ofNullable(x.getLastName()).isPresent())
+                .filter(x -> Optional.ofNullable(x.getFirstName()).isPresent()).map(x -> new SimpleName(x.getFirstName(), x.getLastName())).toList();
+        return simpleNames;
     }
 
 
