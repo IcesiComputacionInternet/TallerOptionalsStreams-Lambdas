@@ -3,6 +3,8 @@ package co.edu.icesi.functional;
 import co.edu.icesi.model.IcesiUser;
 import co.edu.icesi.model.SimpleName;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 public class StreamExample {
@@ -16,7 +18,8 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
-        return null;
+        return  icesiUsers.stream().filter(IcesiUser -> IcesiUser !=null && IcesiUser.getFirstName() !=null &&IcesiUser.getLastName() !=null).map(IcesiUser::getLastName).flatMap(users -> Arrays.stream(users.split(" "))).distinct().sorted().toList();
+
     }
 
     /**
@@ -29,7 +32,8 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
-        return null;
+        List<IcesiUser> usuarios = icesiUsers.stream().filter(IcesiUser -> IcesiUser !=null && IcesiUser.getAddress()!=null && IcesiUser.getAddress().getStreet() == street).toList();
+        return usuarios;
     }
 
     /**
@@ -39,7 +43,9 @@ public class StreamExample {
      * @return a list of SimpleName.
      */
     public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
-        return null;
+        List<IcesiUser> filtrados = icesiUsers.stream().filter(IcesiUser -> IcesiUser!=null && IcesiUser.getLastName()!=null &&IcesiUser.getFirstName()!=null).toList();
+        List<SimpleName> usuario = filtrados.stream().map(icesiUser -> new SimpleName(icesiUser.getFirstName(), icesiUser.getLastName())).toList();
+        return usuario;
     }
 
 
