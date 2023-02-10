@@ -47,10 +47,10 @@ public class LambdaExample {
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
     public Predicate<String> containsRepeatedCharacters() {
-        return (characters) -> stringContainsRepeatedCharacters(characters);
+        return (characters) -> stringContainsRepeatedCharacters(characters); //-0.1
     }
 
-    private boolean stringContainsRepeatedCharacters(String characters){
+    private boolean stringContainsRepeatedCharacters(String characters){ // y si usas streams?
         boolean verification = true;
         HashMap<String, Integer> letters = new HashMap<String, Integer>();
 
