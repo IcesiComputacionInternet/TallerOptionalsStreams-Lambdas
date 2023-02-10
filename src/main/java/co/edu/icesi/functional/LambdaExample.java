@@ -49,7 +49,7 @@ public class LambdaExample {
         return (x) -> repeatedVerifier(x);
     }
 
-    public boolean repeatedVerifier(String word) {
+    public boolean repeatedVerifier(String word) { // y si usas streams para esto? -0.1
         ArrayList<Character> filtered = new ArrayList<>();
         for(int i=0; i<word.length(); i++) {
             if(!filtered.contains(word.charAt(i)) && !filtered.contains(Character.toUpperCase(word.charAt(i))) ) {
