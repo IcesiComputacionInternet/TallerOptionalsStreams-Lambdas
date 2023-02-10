@@ -40,7 +40,7 @@ public class StreamExample {
         List<IcesiUser> matches = icesiUsers.stream().filter(Objects::nonNull)
                 .filter(icesiUser -> Objects.nonNull(icesiUser.getAddress()) &&
                         Objects.nonNull(icesiUser.getAddress().getStreet()) &&
-                        icesiUser.getAddress().getStreet().equals(street)).toList();
+                        icesiUser.getAddress().getStreet().equals(street)).toList(); // y si usas optionals? -0.1
         return matches;
     }
 

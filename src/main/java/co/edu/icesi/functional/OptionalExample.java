@@ -15,7 +15,7 @@ public class OptionalExample {
      * @return The street of the given icesiUser
      */
     public String obtainUserStreet(IcesiUser icesiUser) {
-        return Optional.ofNullable(icesiUser).map(user -> user.getAddress()).map(adress -> adress.getStreet())
+        return Optional.ofNullable(icesiUser).map(user -> user.getAddress()).map(adress -> adress.getStreet()) // usar referencia de metodos
                 .orElseThrow(() -> new RuntimeException("Couldn't get the street"));
     }
 
@@ -28,7 +28,7 @@ public class OptionalExample {
      * @return the description of the given icesiUser or "default description" if not present.
      */
     public String obtainUserDescription(IcesiUser icesiUser) {
-        return Optional.ofNullable(icesiUser).map(user -> user.getAddress()).map(adress -> adress.getDescription())
+        return Optional.ofNullable(icesiUser).map(user -> user.getAddress()).map(adress -> adress.getDescription()) // usar referencio de metodos
                 .orElse("default description");
     }
 

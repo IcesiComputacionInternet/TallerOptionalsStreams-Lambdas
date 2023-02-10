@@ -35,7 +35,7 @@ public class LambdaExample {
         String dictionary = "abcdefghijklmnopqrstuvwxyz";
         String cadena = "";
         for ( int i = 0; i < l; i++){
-            cadena += dictionary.charAt(rand.nextInt(dictionary.length()));
+            cadena += dictionary.charAt(rand.nextInt(dictionary.length())); // usar string builder!
         }
         return cadena;
     }
@@ -45,12 +45,12 @@ public class LambdaExample {
      *  value = 0.75
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
-    public Predicate<String> containsRepeatedCharacters() {
-        Predicate<String> checking = s -> repeatedCheck(s);
+    public Predicate<String> containsRepeatedCharacters() { // -0.25
+        Predicate<String> checking = s -> repeatedCheck(s); // porque declarar la variable?
         return checking;
     }
 
-    public boolean repeatedCheck(String cadena) {
+    public boolean repeatedCheck(String cadena) { // y si lo haces con streams?
         boolean state = true;
         for(int i = 0; i < cadena.length(); i++){
             for(int j = i+1; j < cadena.length(); j++){
