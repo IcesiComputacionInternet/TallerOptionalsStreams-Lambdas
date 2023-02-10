@@ -30,8 +30,8 @@ public class LambdaExample {
      * @return a random lowercase string of the given length
      */
     public Supplier<String> randomStringSupplier(int length) {
-        String randomString = generateRandomString(length).toLowerCase();
-        return () -> randomString;
+        String randomString = generateRandomString(length).toLowerCase(); // mal uso del llamado de funcion
+        return () -> randomString; // deberias pasar la función para que haga todo de una vez y solo llamar la referencia -0.1
     }
 
     private String generateRandomString(int length){
@@ -48,11 +48,11 @@ public class LambdaExample {
      *  value = 0.75
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
-    public Predicate<String> containsRepeatedCharacters() {
+    public Predicate<String> containsRepeatedCharacters() { //-0.1
         return x -> checkRepeatedCharacters(x.toLowerCase());
     }
 
-    private boolean checkRepeatedCharacters(String str){
+    private boolean checkRepeatedCharacters(String str){ // se puede hacer con streams
         ArrayList<Character> characters = new ArrayList<>();
         for (int i = 0; i < str.length(); i++) {
             Character tempChar = str.charAt(i);

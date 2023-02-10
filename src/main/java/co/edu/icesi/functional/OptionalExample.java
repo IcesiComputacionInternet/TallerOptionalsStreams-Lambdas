@@ -17,7 +17,7 @@ public class OptionalExample {
      */
     public String obtainUserStreet(IcesiUser icesiUser) {
         Optional<IcesiUser> optionalIcesiUser = Optional.ofNullable(icesiUser);
-        return optionalIcesiUser.map((x) -> (x.getAddress().getStreet())).orElseThrow(() -> new RuntimeException("Couldn't get the street"));
+        return optionalIcesiUser.map((x) -> (x.getAddress().getStreet())).orElseThrow(() -> new RuntimeException("Couldn't get the street")); // null pointer exception -0.4
     }
 
 
@@ -32,7 +32,7 @@ public class OptionalExample {
      */
     public String obtainUserDescription(IcesiUser icesiUser) {
         Optional<IcesiUser> optionalIcesiUser = Optional.ofNullable(icesiUser);
-        return optionalIcesiUser.map((x) -> (x.getAddress().getDescription())).orElse("default description");
+        return optionalIcesiUser.map((x) -> (x.getAddress().getDescription())).orElse("default description"); // null pointer exception -0.4
     }
 
 

@@ -31,7 +31,7 @@ public class StreamExample {
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
         return icesiUsers.stream().filter(x -> Optional.ofNullable(x).isPresent()).filter(x -> Optional.ofNullable(x.getAddress()).isPresent())
-                .filter(x -> Optional.ofNullable(x.getAddress().getStreet()).isPresent()).filter(x -> x.getAddress().getStreet().equals(street)).toList();
+                .filter(x -> Optional.ofNullable(x.getAddress().getStreet()).isPresent()).filter(x -> x.getAddress().getStreet().equals(street)).toList(); // mal uso de optionals -0.2
     }
 
     /**
@@ -40,7 +40,7 @@ public class StreamExample {
      * @param icesiUsers icesiUsers a list of IcesiUser, can contain null values.
      * @return a list of SimpleName.
      */
-    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
+    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) { // despues de las 4pm -0.5
         List<SimpleName> simpleNames = icesiUsers.stream().filter(x -> Optional.ofNullable(x).isPresent()).filter(x -> Optional.ofNullable(x.getLastName()).isPresent())
                 .filter(x -> Optional.ofNullable(x.getFirstName()).isPresent()).map(x -> new SimpleName(x.getFirstName(), x.getLastName())).toList();
         return simpleNames;
