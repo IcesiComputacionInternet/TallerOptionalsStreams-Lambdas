@@ -15,7 +15,7 @@ public class OptionalExample {
      * @param icesiUser an IcesiUser object
      * @return The street of the given icesiUser
      */
-    public String obtainUserStreet(IcesiUser icesiUser) {
+    public String obtainUserStreet(IcesiUser icesiUser) { // -0.5
         Optional<IcesiUser> optionalUser = Optional.ofNullable(icesiUser);
         Optional<String> optionalStreet;
 
@@ -41,7 +41,7 @@ public class OptionalExample {
      * @param icesiUser icesiUser an IcesiUser object
      * @return the description of the given icesiUser or "default description" if not present.
      */
-    public String obtainUserDescription(IcesiUser icesiUser) {
+    public String obtainUserDescription(IcesiUser icesiUser) { // -0.5
 
         Optional<IcesiUser> optional = Optional.ofNullable(icesiUser);
         Optional<String> optionalDescription;

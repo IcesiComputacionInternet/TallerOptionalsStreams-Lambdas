@@ -25,7 +25,7 @@ public class LambdaExample {
      * @param length the length of the random string
      * @return a random lowercase string of the given length
      */
-    public final static String banco = "abcdefghijklmnopqrstuvwxyz";
+    public final static String banco = "abcdefghijklmnopqrstuvwxyz"; //?????????????????? -0.25
     public Supplier<String> randomStringSupplier(int length) {
         return ()-> generateString(length);
     }
@@ -44,11 +44,11 @@ public class LambdaExample {
      *  value = 0.75
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
-    public Predicate<String> containsRepeatedCharacters() {
+    public Predicate<String> containsRepeatedCharacters() { // -0.1
         return x->repeatChar(x);
     }
 
-    private boolean repeatChar(String string){
+    private boolean repeatChar(String string){ // y si usas streams?
 
         boolean repeat = true;
         boolean aux2 = true;
