@@ -29,7 +29,7 @@ public class LambdaExample {
         return () -> {
             String str = "";
             for (int i = 0; i < length; i++) {
-                str += (char) (Math.random() * 26 + 'a');
+                str += (char) (Math.random() * 26 + 'a'); // usar string builder, los string no son modificables!
             }
             return str;
         };
