@@ -32,7 +32,7 @@ public class LambdaExample {
     public String makeWord(int length){
         String word = "";
         for(int i=0; i<length; i++){
-            word +=(char) (Math.random()*26 + 'a');
+            word +=(char) (Math.random()*26 + 'a'); // usar string builder para estos casos, los string no son modificables!
         }
         return word;
     }
