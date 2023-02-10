@@ -15,7 +15,7 @@ public class LambdaExample {
      */
     public Function<String, Integer> stringToIntFunction() {
 
-        Function<String, Integer> parser = input -> (Integer.valueOf(input));
+        Function<String, Integer> parser = input -> (Integer.valueOf(input)); // no declarar interfaces funcionales -0.1
         return parser;
     }
 
@@ -37,7 +37,7 @@ public class LambdaExample {
         String randomString = "";
         for (int i = 0; i < length; i++) {
             int number = random.nextInt(122 - 97) + 97;
-            randomString += (char) number;
+            randomString += (char) number; // usar string builder
         }
         return randomString;
     }
@@ -54,7 +54,7 @@ public class LambdaExample {
         return word;
     }
 
-    public boolean repeated(String word){
+    public boolean repeated(String word){ // puede ser una funcion in-line
 
         long noDuplicated = word.toLowerCase().chars().distinct().count();
         int original = word.length();

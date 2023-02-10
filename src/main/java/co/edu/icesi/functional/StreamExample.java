@@ -16,7 +16,7 @@ public class StreamExample {
      * @param icesiUsers a list of IcesiUser, can contain null values.
      * @return a sorted list of different lastnames.
      */
-    public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
+    public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) { // porque separar los valores, cuidado con los nombres de las variables -0.2
         List<String[]> lastNames2 = icesiUsers.stream().filter(Objects::nonNull).map(IcesiUser::getLastName).map(j->j.split(" ")).toList();
         List<String> lastNames1 = lastNames2.stream().flatMap(Arrays::stream).toList();
         return  lastNames1.stream().sorted().distinct().toList();
@@ -33,7 +33,7 @@ public class StreamExample {
      * @param street     a non-null string indicating the street to filter
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
-    public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
+    public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) { // uso de == en vez de .equals -0.8
         List<IcesiUser> filteredUsers = icesiUsers.stream().filter(Objects::nonNull).filter(user -> user.getAddress()!=null).filter(user-> user.getAddress().getStreet()==street).toList();
         return filteredUsers;
     }
@@ -44,7 +44,7 @@ public class StreamExample {
      * @param icesiUsers icesiUsers a list of IcesiUser, can contain null values.
      * @return a list of SimpleName.
      */
-    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
+    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) { // entrego despues de las 4pm -0.5
 
         List<SimpleName> names = icesiUsers.stream().filter(Objects::nonNull).map(user -> new SimpleName(user.getFirstName(), user.getLastName())).toList();
         return names;
