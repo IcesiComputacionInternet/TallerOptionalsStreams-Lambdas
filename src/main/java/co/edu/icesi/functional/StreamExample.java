@@ -33,9 +33,9 @@ public class StreamExample {
      * @param street     a non-null string indicating the street to filter
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
-    public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
+    public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) { // -0.8
         return icesiUsers.stream().filter(IcesiUser -> IcesiUser!=null && IcesiUser.getAddress()!=null)
-               .filter(IcesiUser -> IcesiUser.getAddress().getStreet() == street).toList();
+               .filter(IcesiUser -> IcesiUser.getAddress().getStreet() == street).toList(); // uso de == y no .equals!!
     }
 
 
@@ -45,7 +45,7 @@ public class StreamExample {
      * @param icesiUsers icesiUsers a list of IcesiUser, can contain null values.
      * @return a list of SimpleName.
      */
-    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
+    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) { // despues de las 4pm -0.5
        return icesiUsers.stream().filter(Objects::nonNull).map(icesiuser -> new SimpleName(icesiuser.getFirstName(), icesiuser.getLastName())).toList();
     }
 
