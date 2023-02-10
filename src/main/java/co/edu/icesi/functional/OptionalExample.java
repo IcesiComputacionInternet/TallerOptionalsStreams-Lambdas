@@ -15,9 +15,9 @@ public class OptionalExample {
      * @param icesiUser an IcesiUser object
      * @return The street of the given icesiUser
      */
-    public String obtainUserStreet(IcesiUser icesiUser) {
-        Optional<String> street = Optional.ofNullable(icesiUser.getAddress().getStreet());
-        return street.orElseGet(()->{throw new RuntimeException("Couldn't get the street");});
+    public String obtainUserStreet(IcesiUser icesiUser) { // -0.5
+        Optional<String> street = Optional.ofNullable(icesiUser.getAddress().getStreet()); // null pointer exception
+        return street.orElseGet(()->{throw new RuntimeException("Couldn't get the street");}); // mal uso de or else get
     }
 
 

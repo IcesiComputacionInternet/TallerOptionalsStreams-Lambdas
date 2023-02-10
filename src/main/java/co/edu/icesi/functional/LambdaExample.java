@@ -23,7 +23,7 @@ public class LambdaExample {
      * @return a random lowercase string of the given length
      */
     public Supplier<String> randomStringSupplier(int length) {
-        return () -> {
+        return () -> { // mal uso de lambda -0.1
             String str = "";
             for (int i = 0; i < length; i++) {
                 char random = (char) ((Math.random() * (123 - 97))+97);
