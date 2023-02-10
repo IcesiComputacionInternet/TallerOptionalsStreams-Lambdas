@@ -45,7 +45,7 @@ public class StreamExample {
      * @param icesiUsers icesiUsers a list of IcesiUser, can contain null values.
      * @return a list of SimpleName.
      */
-    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
+    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) { // despues de las 4 -0.5
         List<SimpleName> toSimpleUsers=icesiUsers.stream().filter(Objects::nonNull).map(users->new SimpleName(users.getFirstName(),users.getLastName())).toList();
         return toSimpleUsers;
     }

@@ -34,7 +34,7 @@ public class LambdaExample {
             for (int i = 0; i <length ; i++) {
                 int index=randomFuction.nextInt(alphabet.length());
                 char ramdomCharValue= alphabet.charAt(index);
-                finalRandomWord+=ramdomCharValue;
+                finalRandomWord+=ramdomCharValue; // usar string builder!
             }
             return finalRandomWord;
         };
