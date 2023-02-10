@@ -30,7 +30,7 @@ public class LambdaExample {
         return () -> methodReference(length);
     }
 
-    public String methodReference(int length){
+    public String methodReference(int length){ // que es method reference??
 
         Random r = new Random();
         String string = "";
@@ -52,7 +52,7 @@ public class LambdaExample {
         return string -> methodReference(string);
     }
 
-    public boolean methodReference(String string){
+    public boolean methodReference(String string){ // que es method reference??, se puede hacer con streams -0.1
 
         boolean verify = true;
 
