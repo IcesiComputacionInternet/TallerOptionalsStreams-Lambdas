@@ -13,10 +13,10 @@ public class OptionalExample {
      * @param icesiUser an IcesiUser object
      * @return The street of the given icesiUser
      */
-    public String obtainUserStreet(IcesiUser icesiUser) {
-        Optional<String> userStreet = Optional.ofNullable(icesiUser.getAddress().getStreet());
+    public String obtainUserStreet(IcesiUser icesiUser) { // -0.5
+        Optional<String> userStreet = Optional.ofNullable(icesiUser.getAddress().getStreet()); //Null pointer exception
         return userStreet.orElseGet(()->{
-            throw new RuntimeException("Couldn't get the street");}
+            throw new RuntimeException("Couldn't get the street");} // or else get??
         );
     }
 
@@ -28,9 +28,9 @@ public class OptionalExample {
      * @param icesiUser icesiUser an IcesiUser object
      * @return the description of the given icesiUser or "default description" if not present.
      */
-    public String obtainUserDescription(IcesiUser icesiUser) {
+    public String obtainUserDescription(IcesiUser icesiUser) { // -0.4
         Optional<IcesiUser> optionalUser = Optional.ofNullable(icesiUser);
-        return optionalUser.map((x) -> (x.getAddress().getDescription())).orElse("default description");
+        return optionalUser.map((x) -> (x.getAddress().getDescription())).orElse("default description"); //null pointer exception
     }
 
 

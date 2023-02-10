@@ -21,7 +21,7 @@ public class StreamExample {
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
         List<String> lastNames =   icesiUsers.stream().filter(Objects::nonNull).map(IcesiUser::getLastName).flatMap(x -> Arrays.stream(x.split(" "))).toList();
-        return lastNames.stream().distinct().sorted().toList();
+        return lastNames.stream().distinct().sorted().toList(); // se puede hacer en una linea
     }
 
     /**
@@ -45,7 +45,7 @@ public class StreamExample {
      * @param icesiUsers icesiUsers a list of IcesiUser, can contain null values.
      * @return a list of SimpleName.
      */
-    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
+    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) { // despues de las 4pm -0.5
         return icesiUsers.stream().filter(Objects::nonNull).map(x -> new SimpleName(x.getFirstName(),x.getLastName())).toList();
     }
 
