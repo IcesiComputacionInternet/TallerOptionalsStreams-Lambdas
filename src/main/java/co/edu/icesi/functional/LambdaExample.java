@@ -14,7 +14,7 @@ public class LambdaExample {
      * @return an integer representation of the string
      */
     public Function<String, Integer> stringToIntFunction() {
-        Function<String, Integer> function = (stringX) -> Integer.parseInt(stringX);
+        Function<String, Integer> function = (stringX) -> Integer.parseInt(stringX); // porque no retornar de una vez? - 0.1
         return function;
     }
 
@@ -28,9 +28,10 @@ public class LambdaExample {
      */
     public Supplier<String> randomStringSupplier(int length) {
 
-        return () -> {
+        return () -> { // ojo con esta forma de declarar lambdas, no es una buena practica y lo mencione en clase!
+            // -0.25
 
-            String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // porque mayusculas para luego hacer un .lowercase?
             Random random = new Random();
             StringBuilder sb = new StringBuilder(length);
 
@@ -56,7 +57,7 @@ public class LambdaExample {
      */
     public Predicate<String> containsRepeatedCharacters() {
 
-        Predicate<String> predicate = s -> verifyRepeatition(s);
+        Predicate<String> predicate = s -> verifyRepeatition(s); // no delcarar los predicates o functions de esta forma! -0.1
         return predicate;
     }
 

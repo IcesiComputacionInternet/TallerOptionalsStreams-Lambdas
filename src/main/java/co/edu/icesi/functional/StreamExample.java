@@ -21,10 +21,10 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
-        List<IcesiUser> noNullList = icesiUsers.stream().filter(Objects::nonNull).toList();
+        List<IcesiUser> noNullList = icesiUsers.stream().filter(Objects::nonNull).toList(); // se puede hacer en la misma iteración!
         //List<String> lastNames = icesiUsers.stream().map(IcesiUser::getLastName).toList().stream().distinct().toList();
 
-        List<String> lastNames = noNullList.stream().map(IcesiUser::getLastName).toList().stream().distinct().toList();
+        List<String> lastNames = noNullList.stream().map(IcesiUser::getLastName).toList().stream().distinct().toList();// falta separar los apellidos! -0.8
 
         //
         /*List<String> complexLastNames = lastNames.stream().filter(elem -> !elem.contains(" ")).toList();
@@ -44,7 +44,7 @@ public class StreamExample {
      * @param street     a non-null string indicating the street to filter
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
-    public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
+    public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) { // no cumple con los requerimientos de la funcion -1.0
         List<IcesiUser> noNullListIcesiUsers = icesiUsers.stream().filter(Objects::nonNull).toList();
         List<IcesiAddress> noNullListIcesiUsersAddresses = noNullListIcesiUsers.stream().map(IcesiUser::getAddress).filter(Objects::nonNull).collect(Collectors.toList());
 
