@@ -14,7 +14,7 @@ public class LambdaExample {
      * @return an integer representation of the string
      */
     public Function<String, Integer> stringToIntFunction() {
-        Function<String, Integer> parseString = (String s) -> Integer.parseInt(s);
+        Function<String, Integer> parseString = (String s) -> Integer.parseInt(s); // porque una funcion intermedia y no retornar el valor de una vez?
         return parseString;
     }
 
@@ -27,10 +27,10 @@ public class LambdaExample {
      * @return a random lowercase string of the given length
      */
     public Supplier<String> randomStringSupplier(int length) {
-        return () -> fillRandomString(length);
+        return () -> fillRandomString(length); // -0.25
     }
 
-    private String fillRandomString(int length) {
+    private String fillRandomString(int length) { // esta funcion no cumple con las caracteristicas
         String randomString = "";
         for (int i = 0; i < length; i++) {
             randomString += (char) (Math.random() * 26 + 'a');
@@ -44,7 +44,7 @@ public class LambdaExample {
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
     public Predicate<String> containsRepeatedCharacters() {
-        return (x) -> x.toLowerCase().chars().distinct().count() == x.length();
+        return (x) -> x.toLowerCase().chars().distinct().count() == x.length(); // cuidado con los nombres de las variables
     }
 
 
