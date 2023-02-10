@@ -22,7 +22,7 @@ public class StreamExample {
         List<IcesiUser> notNullList=icesiUsers.stream().filter(iu->iu!=null).toList();
         List<String> listLastNames= notNullList.stream().map(IcesiUser::getLastName).toList();
         List<List<String>>  listAllLastNames=listLastNames.stream().map(str-> List.of(str.split(" "))).toList();
-        List<String> flatMap=listAllLastNames.stream().flatMap(Collection::stream).distinct().sorted().toList();
+        List<String> flatMap=listAllLastNames.stream().flatMap(Collection::stream).distinct().sorted().toList(); // no es necesario separar cada retorno, estas haciendo muchos .toList() -0.2
 
         return flatMap;
     }
@@ -39,7 +39,7 @@ public class StreamExample {
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
         List<IcesiUser> notNullList=icesiUsers.stream().filter(iu->iu!=null && iu.getAddress()!=null).toList();
-        List<IcesiUser> filterUsers=notNullList.stream().filter(iu->street.equals(iu.getAddress().getStreet())).toList();
+        List<IcesiUser> filterUsers=notNullList.stream().filter(iu->street.equals(iu.getAddress().getStreet())).toList(); // separar los retornos y llamar to list -0.2
         return filterUsers;
     }
 
@@ -50,7 +50,7 @@ public class StreamExample {
      * @param icesiUsers icesiUsers a list of IcesiUser, can contain null values.
      * @return a list of SimpleName.
      */
-    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
+    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) { // -0.5 entrega despues de las 4
         List<IcesiUser> notNullList=icesiUsers.stream().filter(iu->iu!=null).toList();
 
         List<SimpleName> snMap=notNullList.stream().map(iu-> new SimpleName(iu.getFirstName(), iu.getLastName())).toList();

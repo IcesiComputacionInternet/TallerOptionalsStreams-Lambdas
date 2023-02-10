@@ -38,7 +38,7 @@ public class LambdaExample {
         String str="";
         for (int i=0;i<length;i++){
             int letterRandom= (int) ((Math.random() * (max - min)) + min);
-            str+=(char)letterRandom;
+            str+=(char)letterRandom; // usar String builder!
         }
         return str;
     }
@@ -48,11 +48,11 @@ public class LambdaExample {
      *  value = 0.75
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
-    public Predicate<String> containsRepeatedCharacters() {
+    public Predicate<String> containsRepeatedCharacters() { // -0.1
 
         return (str)-> repeatedCharacter(str) ;
     }
-    public boolean repeatedCharacter(String str){
+    public boolean repeatedCharacter(String str){ // y si usas streams?
         str=str.toLowerCase();
         boolean rep=true;
         for(int i=0; i<str.length() && rep;i++){
