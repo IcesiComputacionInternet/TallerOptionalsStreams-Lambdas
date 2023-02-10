@@ -25,9 +25,9 @@ public class LambdaExample {
      */
     public Supplier<String> randomStringSupplier(int length) {
 
-        return () -> cadenas(length);
+        return () -> cadenas(length); // -0.25
     }
-    public String cadenas(int length){
+    public String cadenas(int length){ // este metodo no funciona
         String out ="";
         String texto = "abcdefghijklmnopqrstuvxyz";
 
@@ -43,7 +43,7 @@ public class LambdaExample {
      *  value = 0.75
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
-    public Predicate<String> containsRepeatedCharacters() {
+    public Predicate<String> containsRepeatedCharacters() { // -0.25 porque usas tantos for para verificar duplicados
         return (valor) -> verificarRepetidos(valor);
     }
 

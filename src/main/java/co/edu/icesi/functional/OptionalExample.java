@@ -16,9 +16,9 @@ public class OptionalExample {
      * @param icesiUser an IcesiUser object
      * @return The street of the given icesiUser
      */
-    public String obtainUserStreet(IcesiUser icesiUser) {
+    public String obtainUserStreet(IcesiUser icesiUser) { // - 0.1
         Optional<IcesiUser> userIcesi = Optional.ofNullable(icesiUser);
-        Optional<String> value = userIcesi.map(IcesiUser::getAddress).map(IcesiAddress::getStreet);
+        Optional<String> value = userIcesi.map(IcesiUser::getAddress).map(IcesiAddress::getStreet); // porque declarar dos optionals?
         return value.orElseThrow(() -> new RuntimeException("Couldn't get the street"));
     }
 
@@ -30,9 +30,9 @@ public class OptionalExample {
      * @param icesiUser icesiUser an IcesiUser object
      * @return the description of the given icesiUser or "default description" if not present.
      */
-    public String obtainUserDescription(IcesiUser icesiUser) {
+    public String obtainUserDescription(IcesiUser icesiUser) { // - 0.1
         Optional<IcesiUser> descripcion = Optional.ofNullable(icesiUser);
-        String out = descripcion.map(IcesiUser::getAddress).map(IcesiAddress::getDescription).orElseGet(()-> "default description");
+        String out = descripcion.map(IcesiUser::getAddress).map(IcesiAddress::getDescription).orElseGet(()-> "default description"); // porque declarar otra variable?
         return out;
     }
 
