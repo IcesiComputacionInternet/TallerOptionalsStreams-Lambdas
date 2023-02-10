@@ -20,7 +20,7 @@ public class StreamExample {
      * @param icesiUsers a list of IcesiUser, can contain null values.
      * @return a sorted list of different lastnames.
      */
-    public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
+    public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) { // mal uso de .toList solo es necesario una vez! -0.2
       List<String> lastnames =   icesiUsers.stream().filter(Objects::nonNull).map(IcesiUser::getLastName).flatMap(x -> Arrays.stream(x.split(" "))).toList();
         return lastnames.stream().distinct().sorted().toList();
     }
