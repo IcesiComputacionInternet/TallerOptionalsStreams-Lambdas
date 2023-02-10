@@ -16,7 +16,7 @@ public class StreamExample {
      * @param icesiUsers a list of IcesiUser, can contain null values.
      * @return a sorted list of different lastnames.
      */
-    public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
+    public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) { // solo es necesario un call al collectors -0.2
         Set<String> lastNames = icesiUsers.stream()
                 .flatMap(user -> Arrays.stream(user.getLastName().split(" ")))
                 .collect(Collectors.toSet());
@@ -46,7 +46,7 @@ public class StreamExample {
      * @param icesiUsers icesiUsers a list of IcesiUser, can contain null values.
      * @return a list of SimpleName.
      */
-    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
+    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) { // despues de las 4pm -0.5
         return icesiUsers.stream()
                 .map(user -> Optional.ofNullable(user).map(u -> new SimpleName(u.getFirstName(), u.getLastName())))
                 .flatMap(Optional::stream)

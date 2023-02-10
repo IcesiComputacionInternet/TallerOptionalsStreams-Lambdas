@@ -25,7 +25,7 @@ public class LambdaExample {
      * @return a random lowercase string of the given length
      */
     public Supplier<String> randomStringSupplier(int length) {
-        return () -> {
+        return () -> { // mal uso de lambda -0.1
             StringBuilder sb = new StringBuilder();
             Random random = new Random();
             for (int i = 0; i < length; i++) {
@@ -42,7 +42,7 @@ public class LambdaExample {
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
     public Predicate<String> containsRepeatedCharacters() {
-        return str -> {
+        return str -> { // mal uso de lambda, se puede hacer con streams -0.25
             char[] chars = str.toLowerCase().toCharArray();
             Map<Character, Integer> map = new HashMap<>();
             for (char c : chars) {
