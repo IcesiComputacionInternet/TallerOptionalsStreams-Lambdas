@@ -19,7 +19,7 @@ public class OptionalExample {
         String result = Optional.ofNullable(icesiUser)
                 .map(us -> us.getAddress())
                 .map(ad -> ad.getStreet())
-                .orElseThrow(() -> new RuntimeException("Couldn't get the street"));
+                .orElseThrow(() -> new RuntimeException("Couldn't get the street")); // usar referencia de metodos
         return result;
     }
 
@@ -34,7 +34,7 @@ public class OptionalExample {
      *         not present.
      */
     public String obtainUserDescription(IcesiUser icesiUser) {
-        String desc = Optional.ofNullable(icesiUser)
+        String desc = Optional.ofNullable(icesiUser) // lo mismo de arriba
                 .map(us -> us.getAddress())
                 .map(ad -> ad.getDescription())
                 .orElse("default description");
