@@ -41,7 +41,7 @@ public class LambdaExample {
      *  value = 0.75
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
-    public Predicate<String> containsRepeatedCharacters() {
+    public Predicate<String> containsRepeatedCharacters() { // mal uso de un lambda, usar streams! -0.25
         return x-> {
             boolean withoutRepeat = false;
             for (int i = 0; i < x.length(); i++) {
