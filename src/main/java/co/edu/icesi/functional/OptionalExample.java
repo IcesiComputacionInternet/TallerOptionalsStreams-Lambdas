@@ -23,7 +23,7 @@ public class OptionalExample {
         return optionalIcesiUser.stream()
                 .map(IcesiUser::getAddress)
                 .map(IcesiAddress::getStreet)
-                .findFirst()
+                .findFirst()// No es necesario el findfirst
                 .orElseThrow(() -> new RuntimeException("Couldn't get the street"));
     }
 
