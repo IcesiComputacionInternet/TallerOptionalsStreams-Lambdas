@@ -23,7 +23,7 @@ public class LambdaExample {
      * @param length the length of the random string
      * @return a random lowercase string of the given length
      */
-    public Supplier<String> randomStringSupplier(int length) {
+    public Supplier<String> randomStringSupplier(int length) { // -0.65
        return () -> randomStringSupplierMethod(length);
     }
 
@@ -31,7 +31,7 @@ public class LambdaExample {
         String word = "";
         int numASCII=65;
         for(int k=0;k<len;k++) {
-            word+=Character.toString((char) numASCII);
+            word+=Character.toString((char) numASCII); // esto no es un random string
             numASCII++;
         }
         return word.toLowerCase();
@@ -42,11 +42,11 @@ public class LambdaExample {
      *  value = 0.75
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
-    public Predicate<String> containsRepeatedCharacters() {
+    public Predicate<String> containsRepeatedCharacters() { // -0.25
         return (word) -> filterStringPredicateMethod(word);
     }
 
-    public boolean filterStringPredicateMethod(String w){
+    public boolean filterStringPredicateMethod(String w){ // y si usas streams? ademas, muchos for para la funcion
         boolean repeated=true;
         int cont;
         String letterk;
