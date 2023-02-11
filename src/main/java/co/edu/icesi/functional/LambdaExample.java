@@ -1,6 +1,7 @@
 package co.edu.icesi.functional;
 
 import java.util.Locale;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -35,13 +36,15 @@ public class LambdaExample {
     public String getRandomString(int length){
         int max=122;
         int min=97;
-        String str="";
-        for (int i=0;i<length;i++){
-            int letterRandom= (int) ((Math.random() * (max - min)) + min);
-            str+=(char)letterRandom; // usar String builder!
-        }
+        Random random = new Random();
+        String str = random.ints(min,max+1)
+                .limit(length)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint,StringBuilder::append)
+                .toString();
+        // usar String builder! (ok)
         return str;
     }
+
 
     /**
      *  Create a predicate using a lambda or method reference that filters the strings with repeated characters case-insensitive
@@ -49,26 +52,9 @@ public class LambdaExample {
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
     public Predicate<String> containsRepeatedCharacters() { // -0.1
-
-        return (str)-> repeatedCharacter(str) ;
+    // y si usas streams? (ok)
+        return (str)-> str.toLowerCase().chars().distinct().count()==str.length() ;
     }
-    public boolean repeatedCharacter(String str){ // y si usas streams?
-        str=str.toLowerCase();
-        boolean rep=true;
-        for(int i=0; i<str.length() && rep;i++){
-            int count=0;
-            for(int j=0; j<str.length();j++){
-                if(str.charAt(i)==str.charAt(j)){
-                    count++;
-                }
-                if(count>1){
-                    rep=false;
-                }
 
-            }
-        }
-
-        return rep;
-    }
 
 }

@@ -16,9 +16,9 @@ public class OptionalExample {
      * @return The street of the given icesiUser
      */
     public String obtainUserStreet(IcesiUser icesiUser) {
-        Optional<IcesiUser> opIU=Optional.of(icesiUser);
-        Optional<IcesiAddress> opAddress=opIU.map(IcesiUser::getAddress);
-        Optional<String> opStreet=opAddress.map(IcesiAddress::getStreet);  // no es necesario declarar cada optional! -0.1
+        Optional<String> opStreet=Optional.of(icesiUser)
+            .map(IcesiUser::getAddress)
+            .map(IcesiAddress::getStreet);  // no es necesario declarar cada optional! -0.1 (ok)
 
         return  opStreet.orElseThrow( ()-> new RuntimeException("Couldn't get the street"));
     }
@@ -33,9 +33,9 @@ public class OptionalExample {
      * @return the description of the given icesiUser or "default description" if not present.
      */
     public String obtainUserDescription(IcesiUser icesiUser) {
-        Optional<IcesiUser> opIU=Optional.ofNullable(icesiUser);
-        Optional<IcesiAddress> opAddress=opIU.map(IcesiUser::getAddress);
-        Optional<String> opDescription=opAddress.map(IcesiAddress::getDescription); // lo mismo de arriba -0.1
+        Optional<String> opDescription=Optional.ofNullable(icesiUser)
+                        .map(IcesiUser::getAddress)
+                        .map(IcesiAddress::getDescription); // lo mismo de arriba -0.1 (ok)
 
         return opDescription.orElseGet(()->"default description");
     }

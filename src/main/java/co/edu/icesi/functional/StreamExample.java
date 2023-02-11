@@ -19,10 +19,10 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
-        List<IcesiUser> notNullList=icesiUsers.stream().filter(iu->iu!=null).toList();
-        List<String> listLastNames= notNullList.stream().map(IcesiUser::getLastName).toList();
-        List<List<String>>  listAllLastNames=listLastNames.stream().map(str-> List.of(str.split(" "))).toList();
-        List<String> flatMap=listAllLastNames.stream().flatMap(Collection::stream).distinct().sorted().toList(); // no es necesario separar cada retorno, estas haciendo muchos .toList() -0.2
+        List<String> flatMap =icesiUsers.stream().filter(iu->iu!=null)
+                .map(IcesiUser::getLastName)
+                .map(str-> List.of(str.split(" ")))
+                .flatMap(Collection::stream).distinct().sorted().toList(); // no es necesario separar cada retorno, estas haciendo muchos .toList() -0.2 (ok)
 
         return flatMap;
     }
@@ -38,8 +38,8 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
-        List<IcesiUser> notNullList=icesiUsers.stream().filter(iu->iu!=null && iu.getAddress()!=null).toList();
-        List<IcesiUser> filterUsers=notNullList.stream().filter(iu->street.equals(iu.getAddress().getStreet())).toList(); // separar los retornos y llamar to list -0.2
+        List<IcesiUser> filterUsers=icesiUsers.stream().filter(iu->iu!=null && iu.getAddress()!=null)
+                .filter(iu->street.equals(iu.getAddress().getStreet())).toList(); // separar los retornos y llamar to list -0.2 (ok)
         return filterUsers;
     }
 
@@ -50,10 +50,9 @@ public class StreamExample {
      * @param icesiUsers icesiUsers a list of IcesiUser, can contain null values.
      * @return a list of SimpleName.
      */
-    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) { // -0.5 entrega despues de las 4
-        List<IcesiUser> notNullList=icesiUsers.stream().filter(iu->iu!=null).toList();
-
-        List<SimpleName> snMap=notNullList.stream().map(iu-> new SimpleName(iu.getFirstName(), iu.getLastName())).toList();
+    public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) { // -0.5 entrega despues de las 4 (ok)
+        List<SimpleName> snMap=icesiUsers.stream().filter(iu->iu!=null)
+                .map(iu-> new SimpleName(iu.getFirstName(), iu.getLastName())).toList();
 
         return snMap;
     }
