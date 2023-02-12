@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StreamTest {
 
-
     private final StreamExample streamExample = new StreamExample();
 
 
