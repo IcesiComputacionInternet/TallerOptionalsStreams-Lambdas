@@ -3,7 +3,8 @@ package co.edu.icesi.functional;
 import co.edu.icesi.model.IcesiUser;
 import co.edu.icesi.model.SimpleName;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class StreamExample {
 
@@ -16,7 +17,12 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
-        return null;
+
+        List<String> splitLastNames = icesiUsers.stream().filter(user -> user != null).map(IcesiUser::getLastName).toList();
+
+        List<String> lastNames = splitLastNames.stream().map(lastName -> List.of(lastName.split(" "))).flatMap(Collection::stream).distinct().sorted().toList();
+
+        return lastNames;
     }
 
     /**
@@ -29,7 +35,20 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
-        return null;
+
+        List<IcesiUser> usersVerified = icesiUsers.stream().filter(user -> userNotNull(user) && verifyStreet(user, street)).toList();
+
+        return usersVerified;
+    }
+
+    public boolean userNotNull(IcesiUser user){
+
+        return user != null;
+    }
+
+    public boolean verifyStreet(IcesiUser user, String street){
+
+        return user.getAddress() != null && street.equalsIgnoreCase(user.getAddress().getStreet());
     }
 
     /**
@@ -39,7 +58,17 @@ public class StreamExample {
      * @return a list of SimpleName.
      */
     public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) {
-        return null;
+
+        List<String> names = icesiUsers.stream().filter(user -> user != null).map(IcesiUser::getFirstName).toList();
+        List<String> lastNames = icesiUsers.stream().filter(user -> user != null).map(IcesiUser::getLastName).toList();
+        List<SimpleName> simpleNames = new ArrayList<>();
+
+        for (int i = 0; i < names.size(); i++){
+            SimpleName simpleName = new SimpleName(names.get(i), lastNames.get(i));
+            simpleNames.add(simpleName);
+        }
+
+        return simpleNames;
     }
 
 
