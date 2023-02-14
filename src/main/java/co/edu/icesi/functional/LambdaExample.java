@@ -1,5 +1,6 @@
 package co.edu.icesi.functional;
 
+import java.util.Random;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -28,42 +29,20 @@ public class LambdaExample {
     }
     public String generatedString(int length) {
         String letter = "abcdefghijklmnopqrstvwxyz";
-        String txt = "";
+        StringBuilder txt = new StringBuilder();
+        Random random = new Random();
         for (int i = 0; i < length; i++) {
-           int num = (int) (Math.random()); // no funciona!
-           txt += letter.charAt(num);
+           int num = random.nextInt(letter.length()); // corregido
+           txt.append(letter.charAt(num));
         }
-        return txt;
+        return txt.toString();
     }
     /**
      *  Create a predicate using a lambda or method reference that filters the strings with repeated characters case-insensitive
      *  value = 0.75
      * @return a predicate that filters repeated characters case-insensitive of a string
      */
-    public Predicate<String> containsRepeatedCharacters() { // -0.1
-        return (txt) -> filterChar(txt);
+    public Predicate<String> containsRepeatedCharacters() { // corregido
+        return (txt) -> txt.toUpperCase().chars().distinct().count() == txt.length();
     }
-
-    public boolean filterChar(String txt) { // y si lo haces con streams?
-        boolean repeated = true;
-        int letter;
-        char save[] = txt.toCharArray();
-        for (int i = 0; i < txt.length(); i++) {
-            letter = 0;
-            for (int j = 0; j < txt.length(); j++) {
-                String ltr1 = String.valueOf(save[i]);
-                String ltr2 = String.valueOf(save[j]);
-                if(ltr1.equalsIgnoreCase(ltr2)) {
-                    letter++;
-                }
-                if(letter > 1){
-                    repeated = false;
-                } else {
-                    repeated = true;
-                }
-            }
-        }
-        return repeated;
-    }
-
 }

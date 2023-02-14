@@ -7,6 +7,7 @@ import co.edu.icesi.model.SimpleName;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class StreamExample {
 
@@ -34,8 +35,8 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) { // -0.8
-        return icesiUsers.stream().filter(IcesiUser -> IcesiUser!=null && IcesiUser.getAddress()!=null)
-               .filter(IcesiUser -> IcesiUser.getAddress().getStreet() == street).toList(); // uso de == y no .equals!!
+        return icesiUsers.stream().filter(Objects::nonNull).filter(icesiUser -> Optional.ofNullable(icesiUser.getAddress())
+                .map(IcesiAddress::getStreet).filter(street::equals).isPresent()).toList(); // corregido
     }
 
 
