@@ -26,15 +26,15 @@ public class LambdaExample {
     public Supplier<String> randomStringSupplier(int length) { // -0.65
        return () -> randomStringSupplierMethod(length);
     }
-
+    //Implementación con la función random
     public String randomStringSupplierMethod(int len) {
-        String word = "";
-        int numASCII=65;
-        for(int k=0;k<len;k++) {
-            word+=Character.toString((char) numASCII); // esto no es un random string
-            numASCII++;
+        String Alphabet = "abcdefghijklmnopqrstuvxyz";
+        StringBuilder word = new StringBuilder(len);
+        for (int i = 0; i < len; i++) {
+            int index = (int)(Alphabet.length() * Math.random());
+            word.append(Alphabet.charAt(index));
         }
-        return word.toLowerCase();
+        return word.toString();
     }
 
     /**
@@ -47,24 +47,8 @@ public class LambdaExample {
     }
 
     public boolean filterStringPredicateMethod(String w){ // y si usas streams? ademas, muchos for para la funcion
-        boolean repeated=true;
-        int cont;
-        String letterk;
-        String letterj;
-        for (int k=0;k<w.length();k++){
-            cont=0;
-            letterk=String.valueOf(w.charAt(k));
-            for (int j=0;j<w.length();j++){
-                letterj=String.valueOf(w.charAt(j));
-                if (letterk.equalsIgnoreCase(letterj)){
-                    cont+=1;
-                }
-            }
-            if (cont>=2){
-                repeated=false;
-            }
-        }
-        return repeated;
+        //uso de funcion chars() de stream
+        return w.toLowerCase().chars().distinct().count() == w.toLowerCase().length();
     }
 
 }

@@ -18,9 +18,10 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) { // -0.2
-        List<IcesiUser> filteredUsers = icesiUsers.stream().filter(x -> x!=null && x.getLastName()!=null).toList();
-        List<String> lastNames = filteredUsers.stream().map(IcesiUser::getLastName).toList();
-        List<String> sortedList= lastNames.stream().flatMap(lastName -> Arrays.stream(lastName.split(" "))).sorted().distinct().toList(); // muchos to list
+        //Eliminación de toList redundantes
+        List<String> sortedList = icesiUsers.stream().filter(x -> x!=null && x.getLastName()!=null)
+                .map(IcesiUser::getLastName).flatMap(lastName -> Arrays.stream(lastName.split(" ")))
+                .sorted().distinct().toList(); // muchos to list
         return sortedList;
     }
 
@@ -34,7 +35,10 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) { // uso de == en vez .equals -0.8
-        List<IcesiUser> filteredUsers = icesiUsers.stream().filter(IcesiUser -> IcesiUser!=null && IcesiUser.getAddress()!=null).filter(IcesiUser -> IcesiUser.getAddress().getStreet() == street).toList();
+        //Implementación de .equalsIgnoreCase()
+        List<IcesiUser> filteredUsers = icesiUsers.stream()
+                .filter(IcesiUser -> IcesiUser!=null && IcesiUser.getAddress()!=null && IcesiUser.getAddress().getStreet()!=null)
+                .filter(IcesiUser -> IcesiUser.getAddress().getStreet().equalsIgnoreCase(street)).toList();
         return filteredUsers;
     }
 
@@ -45,8 +49,9 @@ public class StreamExample {
      * @return a list of SimpleName.
      */
     public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) { // despues de las 4 -0.5
-        List<IcesiUser> filteredUsers = icesiUsers.stream().filter(x -> x!=null && x.getFirstName()!=null && x.getLastName()!=null).toList();
-        return filteredUsers.stream().map(user -> new SimpleName(user.getFirstName(), user.getLastName())).toList();
+        //Uso de 1 solo toList
+        return icesiUsers.stream().filter(x -> x!=null && x.getFirstName()!=null && x.getLastName()!=null)
+                .map(user -> new SimpleName(user.getFirstName(), user.getLastName())).toList();
     }
 
 
