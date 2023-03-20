@@ -1,5 +1,6 @@
 package co.edu.icesi.functional;
 
+import co.edu.icesi.model.IcesiAddress;
 import co.edu.icesi.model.IcesiUser;
 import co.edu.icesi.model.SimpleName;
 
@@ -16,8 +17,12 @@ public class StreamExample {
      * @return a sorted list of different lastnames.
      */
     public List<String> allDifferentLastNamesSorted(List<IcesiUser> icesiUsers) {
-        return icesiUsers.stream().filter(x -> Optional.ofNullable(x).isPresent()).filter(x -> Optional.ofNullable(x.getLastName()).isPresent())
-                .map(x -> x.getLastName().split(" ")).flatMap(Arrays::stream).distinct().sorted().toList();
+        return icesiUsers.stream()
+                .filter(x -> Optional.ofNullable(x).isPresent())
+                .map(IcesiUser::getLastName)
+                .filter(x -> Optional.ofNullable(x).isPresent())
+                .flatMap(x -> Arrays.stream(x.split((" "))))
+                .distinct().sorted().toList();
     }
 
     /**
@@ -30,8 +35,16 @@ public class StreamExample {
      * @return a list of IcesiUser with the matching IcesiUser street.
      */
     public List<IcesiUser> filterUsersByStreet(List<IcesiUser> icesiUsers, String street) {
-        return icesiUsers.stream().filter(x -> Optional.ofNullable(x).isPresent()).filter(x -> Optional.ofNullable(x.getAddress()).isPresent())
-                .filter(x -> Optional.ofNullable(x.getAddress().getStreet()).isPresent()).filter(x -> x.getAddress().getStreet().equals(street)).toList(); // mal uso de optionals -0.2
+        return icesiUsers.stream()
+                .filter(x -> equalStreet(x, street))
+                .toList();
+    }
+
+    private boolean equalStreet(IcesiUser icesiUser, String street){
+        return Optional.ofNullable(icesiUser)
+                .map(IcesiUser::getAddress)
+                .map(IcesiAddress::getStreet)
+                .filter(x -> street.equals(x)).isPresent();
     }
 
     /**
@@ -41,10 +54,14 @@ public class StreamExample {
      * @return a list of SimpleName.
      */
     public List<SimpleName> mapToSimpleName(List<IcesiUser> icesiUsers) { // despues de las 4pm -0.5
-        List<SimpleName> simpleNames = icesiUsers.stream().filter(x -> Optional.ofNullable(x).isPresent()).filter(x -> Optional.ofNullable(x.getLastName()).isPresent())
-                .filter(x -> Optional.ofNullable(x.getFirstName()).isPresent()).map(x -> new SimpleName(x.getFirstName(), x.getLastName())).toList();
-        return simpleNames;
+        return icesiUsers.stream()
+                .filter(x -> hasFullName(x))
+                .map(x -> new SimpleName(x.getFirstName(), x.getLastName()))
+                .toList();
     }
 
-
+    public boolean hasFullName(IcesiUser icesiUser){
+        return Optional.ofNullable(icesiUser).map(IcesiUser::getFirstName).isPresent() &&
+                Optional.ofNullable(icesiUser).map(IcesiUser::getLastName).isPresent();
+    }
 }

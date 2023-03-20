@@ -7,7 +7,6 @@ import java.util.Optional;
 
 public class OptionalExample {
 
-
     /**
      * Using optionals return the street of the given user if not present throw an
      * RuntimeException with the message "Couldn't get the street"
@@ -16,12 +15,11 @@ public class OptionalExample {
      * @return The street of the given icesiUser
      */
     public String obtainUserStreet(IcesiUser icesiUser) {
-        Optional<IcesiUser> optionalIcesiUser = Optional.ofNullable(icesiUser);
-        return optionalIcesiUser.map((x) -> (x.getAddress().getStreet())).orElseThrow(() -> new RuntimeException("Couldn't get the street")); // null pointer exception -0.4
+        return Optional.ofNullable(icesiUser)
+                .map(IcesiUser::getAddress)
+                .map(IcesiAddress::getStreet)
+                .orElseThrow(() -> new RuntimeException("Couldn't get the street"));
     }
-
-
-
 
     /**
      * Using Optionals return the description of the given user if not present return
@@ -31,9 +29,9 @@ public class OptionalExample {
      * @return the description of the given icesiUser or "default description" if not present.
      */
     public String obtainUserDescription(IcesiUser icesiUser) {
-        Optional<IcesiUser> optionalIcesiUser = Optional.ofNullable(icesiUser);
-        return optionalIcesiUser.map((x) -> (x.getAddress().getDescription())).orElse("default description"); // null pointer exception -0.4
+        return Optional.ofNullable(icesiUser)
+                .map(IcesiUser::getAddress)
+                .map(IcesiAddress::getDescription)
+                .orElse("default description");
     }
-
-
 }
